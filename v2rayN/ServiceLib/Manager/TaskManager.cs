@@ -70,8 +70,6 @@ public class TaskManager
                 }
             }
 
-            //Execute once 24 hour
-            
             numOfExecuted++;
         }
     }
@@ -118,7 +116,5 @@ public class TaskManager
                 await _updateFunc?.Invoke(false, msg);
             }).UpdateGeoFileAll();
         }
-    }
-
-    
+    }    
 }
