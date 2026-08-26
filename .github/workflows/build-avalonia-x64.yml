@@ -1,0 +1,32 @@
+name: Build Custom Avalonia Perfect
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository (with submodules)
+      uses: actions/checkout@v4
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore and Publish Avalonia UI
+      run: |
+        cd v2rayN
+        dotnet restore v2rayN.sln
+        dotnet publish v2rayN.Desktop/v2rayN.Desktop.csproj -c Release -r win-x64 --self-contained true
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: v2rayN-Avalonia-Custom-Final
+        path: v2rayN/v2rayN.Desktop/bin/Release/net8.0-windows/win-x64/publish/
