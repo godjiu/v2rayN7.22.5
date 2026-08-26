@@ -23,10 +23,10 @@ jobs:
       run: |
         cd v2rayN
         dotnet restore v2rayN.sln
-        dotnet publish v2rayN.Desktop/v2rayN.Desktop.csproj -c Release -r win-x64 --self-contained true
+        dotnet publish v2rayN.Desktop/v2rayN.Desktop.csproj -c Release -r win-x64 --self-contained true -o ../out/
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: v2rayN-Avalonia-Custom-Final
-        path: v2rayN/v2rayN.Desktop/bin/Release/net8.0-windows/win-x64/publish/
+        path: out/
